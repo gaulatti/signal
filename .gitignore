@@ -1,0 +1,90 @@
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Test binary, built with `go test -c`
+*.test
+
+# Output of the go coverage tool, specifically when used with LiteIDE
+*.out
+
+# Go workspace file
+go.work
+
+# Compiled binary
+signal
+signal-server
+signal-cli
+
+# CLI build artifacts (binaries only, not source files)
+/cli/main
+/cli/server
+/server
+
+# Air live reload temporary files
+tmp/
+
+# Environment variables
+.env
+
+# IDE files
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Log files
+*.log
+
+# Temporary files
+*.tmp
+*.temp
+
+# Build artifacts and vendor
+vendor/
+dist/
+build/
+
+# Test coverage files
+coverage.out
+coverage.html
+*.cover
+
+# Debug and profiling files
+debug
+*.prof
+*.pprof
+
+# Docker artifacts
+*.tar
+.dockerignore.bak
+
+# Local development
+local/
+.local/
+
+# Database files (if using SQLite for local development)
+*.db
+*.sqlite
+*.sqlite3
+
+# Cache and temporary directories
+.cache/
+.tmp/
+
+# Deployment and infrastructure
+terraform.tfstate*
+terraform.tfvars
+.terraform/
+*.plan
+
+# Local configuration overrides
+config/local.*
+.env.local
+.env.production
+.env.staging
