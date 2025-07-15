@@ -5,56 +5,7 @@ A simple, multi-tenant push notification service built with Go, GORM, and MySQL.
 ## Features
 
 - **Multi-tenant architecture** with API key-based authentication
-- **Device t#### 2. Register Device T#### 3. Send Generic Push#### 4. Send APNS Push Notifi#### 5. Send FCM Push Notification
-
-```bash
-curl -X POST http://localhost:8080/push/fcm \
-  -H "Authorization: Digest 1a2b3c4d5e6f7g8h9i0j1k2l3m4n5o6p" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "user_id": "user456",
-    "device_token": "android_device_token_here",
-    "title": "Android Notification",
-    "body": "This is an FCM notification",
-    "data": {"platform": "android"}
-  }'
-# For custom port, replace 8080 with your port (e.g., 3000)
-```sh
-curl -X POST http://localhost:8080/push/apns \
-  -H "Authorization: Digest 1a2b3c4d5e6f7g8h9i0j1k2l3m4n5o6p" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "user_id": "user456",
-    "device_token": "ios_device_token_here",
-    "title": "iOS Notification",
-    "body": "This is an APNS notification",
-    "data": {"platform": "ios"}
-  }'
-# For custom port, replace 8080 with your port (e.g., 3000)
-```
-
-```bash
-curl -X POST http://localhost:8080/push \
-  -H "Authorization: Digest 1a2b3c4d5e6f7g8h9i0j1k2l3m4n5o6p" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "user_id": "user456",
-    "title": "Hello World",
-    "body": "This is a test notification",
-    "data": {"key": "value"}
-  }'
-# For custom port, replace 8080 with your port (e.g., 3000)
-```h
-curl -X POST http://localhost:8080/register \
-  -H "Authorization: Digest 1a2b3c4d5e6f7g8h9i0j1k2l3m4n5o6p" \
-  -H "Content-Type: application/json" \
-  -d '{
-    "device_token": "device123",
-    "user_id": "user456",
-    "platform": "ios"
-  }'
-# For custom port, replace 8080 with your port (e.g., 3000)
-```ration** scoped to tenants
+- **Device registration** scoped to tenants
 - **Real APNS push notifications** using sideshow/apns2 with S3-stored .p8 keys
 - **Real FCM push notifications** using Firebase SDK with S3-stored service account JSON
 - **In-memory caching** of API keys and push service clients for performance
@@ -222,10 +173,6 @@ Or using Docker:
 # Build the image
 docker build -t signal .
 
-```bash
-# Build the image
-docker build -t signal .
-
 # Run with environment variables (using default port 8080)
 docker run -p 8080:8080 \
   -e DB_USER=root \
@@ -242,7 +189,6 @@ docker run -p 3000:3000 \
   -e DB_HOST=host.docker.internal:3306 \
   -e DB_NAME=signal_db \
   signal
-```
 ```
 
 ## API Usage
