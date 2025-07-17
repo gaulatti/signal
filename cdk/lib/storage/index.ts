@@ -12,14 +12,14 @@ const createBuckets = (stack: Stack) => {
    * Frontend Bucket
    */
   const frontendBucket = new Bucket(stack, `${stack.stackName}FrontendBucket`, {
-    bucketName: `${stack.stackName.toLowerCase()}-frontend`,
+    bucketName: `${stack.stackName.toLowerCase()}-x-frontend`,
   });
 
   /**
    * Frontend Bucket
    */
   const assetsBucket = new Bucket(stack, `${stack.stackName}AssetsBucket`, {
-    bucketName: `${stack.stackName.toLowerCase()}-assets`,
+    bucketName: `${stack.stackName.toLowerCase()}-x-assets`,
   });
 
   return { frontendBucket, assetsBucket };
