@@ -1,6 +1,6 @@
 # Signal - Multi-Tenant Push Notification Service
 
-A simple, multi-tenant push notification service built with Go, GORM, and MySQL.
+A simple, multi-tenant push notification service built with Go, GORM, and MySQL, with AWS CDK infrastructure as code.
 
 ## Features
 
@@ -15,6 +15,7 @@ A simple, multi-tenant push notification service built with Go, GORM, and MySQL.
 - **JSON seeding** from config files at startup
 - **S3 integration** for dynamic credential fetching
 - **Modular architecture** with clean separation of concerns
+- **AWS CDK infrastructure** for automated deployment and resource management
 
 ## Project Structure
 
@@ -23,6 +24,17 @@ signal/
 ├── cli/
 │   ├── main.go                  # CLI tool for creating API keys
 │   └── server.go                # Application entry point
+├── cdk/                         # AWS CDK Infrastructure as Code
+│   ├── bin/
+│   │   └── cdk.ts              # CDK app entry point
+│   ├── lib/
+│   │   ├── index.ts            # Main stack definition
+│   │   ├── network/            # CloudFront, Route53, certificates
+│   │   ├── permissions/        # IAM roles and GitHub Actions permissions
+│   │   └── storage/            # S3 buckets for frontend and assets
+│   ├── cdk.json                # CDK configuration
+│   ├── package.json            # CDK dependencies and scripts
+│   └── tsconfig.json           # TypeScript configuration
 ├── config/
 │   └── tenants.json             # Tenant seeding configuration
 ├── src/
@@ -55,6 +67,67 @@ signal/
 ├── Dockerfile                   # Docker configuration
 ├── go.mod                       # Go module dependencies
 └── README.md                    # This file
+```
+
+## AWS Infrastructure (CDK)
+
+The project includes AWS CDK infrastructure as code for automated deployment. The CDK stack provisions:
+
+### Infrastructure Components
+
+- **ECR Repository** - Container registry for the Signal service
+- **S3 Buckets** - Frontend assets and file storage
+- **CloudFront Distribution** - CDN for frontend delivery with SSL certificate
+- **Route53 Hosted Zone** - DNS management with custom domain
+- **IAM Roles** - Service roles and GitHub Actions permissions for CI/CD
+- **CloudWatch Log Groups** - Centralized logging for the service
+
+### CDK Commands
+
+```bash
+# Navigate to CDK directory
+cd cdk
+
+# Install CDK dependencies
+npm install
+
+# Build TypeScript
+npm run build
+
+# Watch for changes during development
+npm run watch
+
+# Run tests
+npm run test
+
+# Preview changes
+npm run cdk:diff
+# or
+npx cdk diff
+
+# Deploy infrastructure
+npm run deploy
+# or
+npx cdk deploy
+
+# Generate CloudFormation template
+npm run cdk:synth
+# or
+npx cdk synth
+```
+
+### CDK Environment Variables
+
+The CDK stack requires the following environment variables:
+
+```bash
+# Service role ARN for the Signal service
+export SERVICE_ROLE_ARN=arn:aws:iam::account-id:role/service-role-name
+
+# AWS credentials and region (if not using AWS profiles)
+export AWS_ACCESS_KEY_ID=your-access-key
+export AWS_SECRET_ACCESS_KEY=your-secret-key
+export AWS_REGION=us-east-1
 ```
 
 ## Setup
